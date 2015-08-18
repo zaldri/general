@@ -1,0 +1,335 @@
+---
+title: "STA380_Homework2"
+author: "Charles Z. Aldrich"
+date: "August 19, 2015"
+output: html_document
+---
+
+## Problem 1: Flights at ABIA  
+  
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
+
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+
+  plots <- c(list(...), plotlist)
+
+  numPlots = length(plots)
+
+  if (is.null(layout)) {
+
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                    ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+
+ if (numPlots==1) {
+    print(plots[[1]])
+
+  } else {
+ 
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+
+   
+    for (i in 1:numPlots) {
+      
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+```
+  
+```{r, echo = FALSE, message = FALSE, warning = FALSE, }
+abia = read.csv("~/GitHub/STA380/data/ABIA.csv")
+
+library(ggplot2)
+
+## January
+january = abia[abia$Month == '1',]
+jan = ggplot(january, aes(x = january$DepTime, y = january$DepDelay))
+p1 = jan + geom_hex(aes(color = january$ArrDelay), color = 1) + theme(legend.position = 'none') + coord_cartesian(ylim = c(-50, 900)) +
+    xlab('Departure Time') + ylab('Delay Length') + ggtitle('January')
+
+## February
+february = abia[abia$Month == '2',]
+feb = ggplot(february, aes(x = february$DepTime, y = february$DepDelay))
+p2 = feb + geom_hex(aes(color = february$ArrDelay), color = 1) + theme(legend.position = 'none') + coord_cartesian(ylim = c(-50, 900)) +
+    xlab('Departure Time') + ylab('Delay Length') + ggtitle('February')
+
+## March
+march = abia[abia$Month == '3',]
+mar = ggplot(march, aes(x = march$DepTime, y = march$DepDelay))
+p3 = mar + geom_hex(aes(color = march$ArrDelay), color = 1) + theme(legend.position = 'none') + coord_cartesian(ylim = c(-50, 900)) +
+    xlab('Departure Time') + ylab('Delay Length') + ggtitle('March')
+
+## April
+april = abia[abia$Month == '4',]
+apr = ggplot(april, aes(x = april$DepTime, y = april$DepDelay))
+p4 = apr + geom_hex(aes(color = april$ArrDelay), color = 1) + theme(legend.position = 'none') + coord_cartesian(ylim = c(-50, 900)) +
+    xlab('Departure Time') + ylab('Delay Length') + ggtitle('April')
+
+## May
+may = abia[abia$Month == '5',]
+may1 = ggplot(may, aes(x = may$DepTime, y = may$DepDelay))
+p5 = may1 + geom_hex(aes(color = may$ArrDelay), color = 1) + theme(legend.position = 'none') + coord_cartesian(ylim = c(-50, 900)) +
+    xlab('Departure Time') + ylab('Delay Length') + ggtitle('May')
+
+## June
+june = abia[abia$Month == '6',]
+jun = ggplot(june, aes(x = june$DepTime, y = june$DepDelay))
+p6 = jun + geom_hex(aes(color = june$ArrDelay), color = 1) + theme(legend.position = 'none') + coord_cartesian(ylim = c(-50, 900)) +
+    xlab('Departure Time') + ylab('Delay Length') + ggtitle('June')
+
+## July
+july = abia[abia$Month == '7',]
+jul = ggplot(july, aes(x = july$DepTime, y = july$DepDelay))
+p7 = jul + geom_hex(aes(color = july$ArrDelay), color = 1) + theme(legend.position = 'none') + coord_cartesian(ylim = c(-50, 900)) +
+    xlab('Departure Time') + ylab('Delay Length') + ggtitle('July')
+
+## August
+august = abia[abia$Month == '8',]
+aug = ggplot(august, aes(x = august$DepTime, y = august$DepDelay))
+p8 = aug + geom_hex(aes(color = august$ArrDelay), color = 1) + theme(legend.position = 'none') + coord_cartesian(ylim = c(-50, 900)) +
+    xlab('Departure Time') + ylab('Delay Length') + ggtitle('August')
+
+## September
+september = abia[abia$Month == '9',]
+sept = ggplot(september, aes(x = september$DepTime, y = september$DepDelay))
+p9 = sept + geom_hex(aes(color = september$ArrDelay), color = 1) + theme(legend.position = 'none') + coord_cartesian(ylim = c(-50, 900)) +
+    xlab('Departure Time') + ylab('Delay Length') + ggtitle('September')
+
+## October
+october = abia[abia$Month == '10',]
+oct = ggplot(october, aes(x = october$DepTime, y = october$DepDelay))
+p10 = oct + geom_hex(aes(color = october$ArrDelay), color = 1) + theme(legend.position = 'none') + coord_cartesian(ylim = c(-50, 900)) +
+    xlab('Departure Time') + ylab('Delay Length') + ggtitle('October')
+
+## November
+november = abia[abia$Month == '11',]
+nov = ggplot(november, aes(x = november$DepTime, y = november$DepDelay))
+p11 = nov + geom_hex(aes(color = november$ArrDelay), color = 1) + theme(legend.position = 'none') + coord_cartesian(ylim = c(-50, 900)) +
+    xlab('Departure Time') + ylab('Delay Length') + ggtitle('November')
+
+## December
+december = abia[abia$Month == '12',]
+dec = ggplot(december, aes(x = december$DepTime, y = december$DepDelay))
+p12 = dec + geom_hex(aes(color = december$ArrDelay), color = 1) + theme(legend.position = 'none') + coord_cartesian(ylim = c(-50, 900)) +
+    xlab('Departure Time') + ylab('Delay Length') + ggtitle('December')
+
+multiplot(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, cols = 4)
+```
+  
+The resulting series of plots show the density in delay length throughout a 24 hr day. All plots are shown in the same scale in order to produce easy comparability across months. Insights from this plot include: the months to fly with the lowest delays throughout each day are September, October, and November. Additionally; June, July, August, and December show the longest delays by month. Finally, as expected, at the start of each day (5:00am), delays are near zero and climb uptil a relatively steady state is reached at rougouy 10:00am each day across each month. Therefore, if an individual wants to fly without having to deal with delays, they have a greater chance of doing so if using flights with departure times prior to 10:00am.
+  
+## Problem 2: Author Attribution  
+  
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(tm)
+author_dirs = Sys.glob('../data/ReutersC50/C50train/*')
+author_dirs = author_dirs[1:50]
+file_list = NULL
+labels = NULL
+for(author in author_dirs) {
+    author_name = substring(author, first=29)
+    files_to_add = Sys.glob(paste0(author, '/*.txt'))
+    file_list = append(file_list, files_to_add)
+    labels = append(labels, rep(author_name, length(files_to_add)))
+}
+
+readerPlain = function(fname){readPlain(elem=list(content=readLines(fname)), id=fname, language='en') }
+
+all_docs = lapply(file_list, readerPlain) 
+names(all_docs) = file_list
+names(all_docs) = sub('.txt', '', names(all_docs))
+
+my_corpus = Corpus(VectorSource(all_docs))
+names(my_corpus) = labels
+
+my_corpus = tm_map(my_corpus, content_transformer(tolower))
+my_corpus = tm_map(my_corpus, content_transformer(removeNumbers))
+my_corpus = tm_map(my_corpus, content_transformer(removePunctuation))
+my_corpus = tm_map(my_corpus, content_transformer(stripWhitespace))
+my_corpus = tm_map(my_corpus, content_transformer(removeWords), stopwords("SMART"))
+
+DTM = DocumentTermMatrix(my_corpus)
+
+DTM = removeSparseTerms(DTM, 0.975)
+
+trainmatrix = as.matrix(DTM)
+
+
+################
+### test dtm ###
+author_dirs2 = Sys.glob('../data/ReutersC50/C50test/*')
+author_dirs2 = author_dirs2[1:50]
+file_list2 = NULL
+labels2 = NULL
+for(author2 in author_dirs2) {
+    author_name2 = substring(author2, first=29)
+    files_to_add2 = Sys.glob(paste0(author2, '/*.txt'))
+    file_list2 = append(file_list2, files_to_add2)
+    labels2 = append(labels2, rep(author_name2, length(files_to_add2)))
+}
+
+readerPlain = function(fname){readPlain(elem=list(content=readLines(fname)), id=fname, language='en') }
+
+all_docs2 = lapply(file_list2, readerPlain) 
+names(all_docs2) = file_list2
+names(all_docs2) = sub('.txt', '', names(all_docs2))
+
+my_corpus2 = Corpus(VectorSource(all_docs2))
+names(my_corpus2) = labels
+
+my_corpus2 = tm_map(my_corpus2, content_transformer(tolower))
+my_corpus2 = tm_map(my_corpus2, content_transformer(removeNumbers))
+my_corpus2 = tm_map(my_corpus2, content_transformer(removePunctuation))
+my_corpus2 = tm_map(my_corpus2, content_transformer(stripWhitespace))
+my_corpus2 = tm_map(my_corpus2, content_transformer(removeWords), stopwords("SMART"))
+
+DTM2 = DocumentTermMatrix(my_corpus2)
+DTM2 = removeSparseTerms(DTM2, 0.975)
+testmatrix = as.matrix(DTM2)
+
+
+
+########################
+#### dtm "cleaning" ####
+trainwords = colnames(trainmatrix)
+testwords = colnames(testmatrix)
+
+droptestwords = vector(length=0)
+for (word in testwords)  {if (!word %in% trainwords) {droptestwords = c(droptestwords,word)}}
+new_testmatrix = testmatrix[,!colnames(testmatrix) %in% droptestwords]
+zerotrainwords = vector(length=0)
+for (word in trainwords)  {if (!word %in% testwords) {zerotrainwords = c(zerotrainwords,word)}}
+new_trainmatrix = trainmatrix[,!colnames(trainmatrix) %in% zerotrainwords]
+
+
+new_testmatrix = testmatrix[,!colnames(testmatrix) %in% droptestwords]
+new_trainmatrix = trainmatrix[,!colnames(trainmatrix) %in% zerotrainwords]
+
+
+
+smooth_count=1/nrow(trainmatrix)
+each_author=rowsum(trainmatrix+smooth_count, labels)
+author_sum=rowSums(each_author)
+log_author = log(each_author/author_sum)
+author_multi = log_author[,!colnames(log_author) %in% zerotrainwords] 
+
+
+
+
+
+## transpose one matrix for matrix multiplication purposes
+testmatrix_T = t(new_testmatrix)
+## matrix multiplication
+matrix_multi_values = author_multi %*% testmatrix_T
+
+## transpose final matrix in order to determine max value
+matrix_multi_values = t(matrix_multi_values)
+author_prediction = colnames(matrix_multi_values)[max.col(matrix_multi_values)]
+author_actual = rownames(matrix_multi_values)
+
+Correct_TF = as.integer(author_prediction == author_actual)
+total_correct = sum(Correct_TF)
+
+outcomes = data.frame(author_actual)
+outcomes$prediction = author_prediction
+outcomes$correct = Correct_TF
+
+outcomes2 = data.frame(rbind(outcomes))
+
+
+percent_correct = sum(Correct_TF)/length(Correct_TF)
+
+
+correct_by_author = as.list.data.frame(aggregate(outcomes2$correct, by=list(authors = outcomes2$author_actual), FUN = sum))
+
+correct_by_author = as.data.frame(correct_by_author)
+correct_by_author$percent = correct_by_author$x/50
+
+ordered = correct_by_author[order(correct_by_author$percent),]
+```
+  
+#### Naive Bayes Accuracy Prediction
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+percent_correct
+head(ordered)
+tail(ordered)
+```
+  
+From the output above it can be seen that Naive Bayes as a classifer model was able to correctly predict 60.36% of all articles in the test dataset. This is based on the term frequency matrices created from all of the articles in each dataset. Overall, the result is not terrible but could be better. Part of the reason for the relatively low overall accuracy of the model is the poor performance on some particular authors. The second readout above shows the 6 worst authors in terms of the percentage of their work in the test dataset that was correctly classified. It is likely that if there were more articles to train the model on then the word frequency for each author would be improved and more words unique to that author would be included. In doing so, Naive Bayes would be able to do a better job of classifying articles for these authors. Alternatively, the final readout above shows the best author classification from Naive Bayes. In the case of the top 3 authors, all but 1 of their works in the test set was accurately classified. This would indicate that the term frequency of works by these authors are both unique in nature and consistant for the particular author. Given these characteristics, Naive Bayes can more accurately classify their works. Thus, as noted above, the overall accuracy of Naive Bayes on this data set performs reasonably well.  
+
+#### Random Forests Prediction
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+rftrain = as.data.frame(new_trainmatrix)
+rftest = as.data.frame(new_testmatrix)
+
+library(randomForest)
+set.seed(35)
+rf_model = randomForest(rftrain, factor(labels), mtry = 5, ntrees = 100)
+rf_prediction = predict(rf_model, data = rftest)
+final_df = as.integer(labels == rf_prediction)
+total_right = sum(final_df)
+prediction_df = as.data.frame(rf_prediction, row.names = labels)
+prediction_df$actual = labels
+prediction_df$score = final_df
+right_by_author = aggregate.data.frame(prediction_df$score, by= list(authors = prediction_df$actual), FUN = sum)
+correct_percent = total_right/length(final_df)
+right_by_author$percent = right_by_author$x/50
+ordered_rf = right_by_author[order(right_by_author$percent),]
+correct_percent
+head(ordered_rf)
+tail(ordered_rf)
+```
+  
+I chose to run random forests as the second supervised classifier model because it proved to be one of the stronger predictive models in the first half of this course. After training the model on the train dataset created for use in the Naive Bayes portion the problem and running it against the test dataset, the resulting overall accuracy of the model was 77.16%. This is far better than Naive Bayes. Part of the reason for the improvement in the overall accuracy is that random forests runs a multitude of trees and returns the optimal output as opposed to simply running one model and using its output as the overall output. The second output above shows the bottom 6 authors, meaning these were the hardest authors for the random forests model to classify. Right off the bat it can be seen that the worst performances are far better from the random forests model than from the naive bayes model. Alternatively, when looking at the authors that were best classified, the random forest model was able to classify 3 authors with 100% accuracy. Thus, random forests does a better overall job of classifying an article based on the term frequencies assoicated with each author. This accuracy level was found using an mtry value of 5 and ntrees of 100. These criteria were chosen for the sake of runtime in the model. If both criteria were increased the accuracy of the model will also increase but the runtime also increases. Therefore, from a relative base level, the random forest model still outperformes the Naive Bayes model for classification on this dataset.  
+  
+## Problem 3: Practice with Association Rule Mining  
+  
+```{r, echo = FALSE, message = FALSE}
+library(arules)
+groceries = read.csv("~/GitHub/STA380/data/groceries.txt", header=FALSE)
+
+index_df= data.frame(1:15296)
+index_df$V1 = groceries$V1
+index_df$V2 = groceries$V2
+index_df$V3 = groceries$V3
+index_df$V4 = groceries$V4
+
+unstack = index_df
+library(reshape2)
+unstack2 = reshape(unstack, varying = 2:ncol(unstack),
+        v.names = 'V', direction = 'long', idvar = 'X1.15296')
+
+
+unstacked = unstack2[which(unstack2$V != ''),]
+
+unstacked$X1.15296 = factor(unstacked$X1.15296)
+unstacked = split(x = unstacked$V, f = unstacked$X1.15296)
+unstacked = lapply(unstacked, unique)
+baskettrans = as(unstacked, 'transactions')
+listrules = apriori(baskettrans,
+                    parameter = list(support = .001, confidence = 0.05, maxlen = 4))
+```
+  
+After playing around with a variety of levels for support and confidence I elected to use the following: support = 0.001 and confidence = 0.05. The reason for the extremely small support level is that it provided results in which paired basket items in the lhs led to items in the rhs. With larger support levels there were only one to one relationships; no many to one relationships were present.  
+  
+#### Readout with Lift > 5:
+```{r, echo = FALSE, message = FALSE}
+inspect(subset(listrules, subset=lift > 5))
+```
+  
+After playing around with lift thresholds, I chose to go with > 5 because it returned 21 association rules that I felt made logical sense. For example, if a basket contains citrus fruit and pip fruit then it is likely to also contain tropical fruit. Another example is all combinations of liquor, red/blush wine, and bottled beer. A third example is condensed milk and coffee and a forth example is herbs and root vegetables. When I think of my own grocery shopping trips, these associations of items are things I could/would easily purchase together. They make logical sense. 
+  
+#### Readout with Confidence > 0.4
+```{r, echo = FALSE, message = FALSE}
+inspect(subset(listrules, subset=confidence > 0.4))
+```
+  
+Similar to what was outlined above; after playing around with various levels for confidence I elected to use > 0.4 because it returned 16 association rules that again made logical sense to me. For example, one association rule was sausage, soda --> rolls/buns. This association rule could be indicative of an upcoming bbq or grill out. Additionally, this level of confidence also returned the association rule between beer, wine, and liquor.  
+  
+Therefore, as noted by the example in the two pervious paragraphs, and by analyzing the association rules returned from each threshold, I believe the association rules generated in this problem make sense. Given a series of shopping baskets containing a variety of items, I believe that association rule mining found various relationships between basket purchases that make sense for a typical consumer. When looking at each assocation rule, I could see myself purchasing that series of items together on my next grocery trip. 

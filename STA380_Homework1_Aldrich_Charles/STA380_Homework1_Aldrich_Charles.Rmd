@@ -219,6 +219,8 @@ quantile(Aggressive[,n_days], 0.05) - 100000
 In order to obtain reproducability of portfolio outcomes I have set.seed(100). With set.seed(100) the following 5% value at risk were found: Even split = -$3,340.14, Safe = -$1,789.488, and Aggressive = -$5,396.544. The 5% value at risk provides a monetary amount of an investors portfolio that is being risked by choosing a particular portfolio asset weighting. As should be expected, the quantity of the portfolio at risk is smallest for the Safe Portfolio and largest for the Aggressive Portfolio. This illustrates the potential loss associated with the amount of risk in each portfolio. Additionally, the 5% value at risk of the evenly weighted portfolio falls within the Safe and Aggressive options. This shows the "average" amount at risk that an investor would face if they did not adjust the weighting to suit their strategy. From a decision standpoint, an investor should look at the 5% value at risk number for each portfolio option and choose the one that they are most comfortable with losing. If an investor is comfortable with losing $5,397 for the chance at seeing larger gains then the aggressive strategy suits them. However, if an investor is only comfortable risking $2,000 of their portfolio then they should look to use the Safe strategy as it is the only portfolio that does not risk more than the investor is comfortable with.  
   
 ## Problem 3: Clustering and PCA:
+  # Look at running xtab to get an accurate number of predictions versus actual outcome
+
 ```{r, echo=FALSE}
 wine = read.csv("~/GitHub/STA380/data/wine.csv")
 ```
