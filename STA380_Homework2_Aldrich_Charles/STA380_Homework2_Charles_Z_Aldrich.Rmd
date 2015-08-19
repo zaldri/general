@@ -207,21 +207,14 @@ zerotrainwords = vector(length=0)
 for (word in trainwords)  {if (!word %in% testwords) {zerotrainwords = c(zerotrainwords,word)}}
 new_trainmatrix = trainmatrix[,!colnames(trainmatrix) %in% zerotrainwords]
 
-
 new_testmatrix = testmatrix[,!colnames(testmatrix) %in% droptestwords]
 new_trainmatrix = trainmatrix[,!colnames(trainmatrix) %in% zerotrainwords]
-
-
 
 smooth_count=1/nrow(trainmatrix)
 each_author=rowsum(trainmatrix+smooth_count, labels)
 author_sum=rowSums(each_author)
 log_author = log(each_author/author_sum)
 author_multi = log_author[,!colnames(log_author) %in% zerotrainwords] 
-
-
-
-
 
 ## transpose one matrix for matrix multiplication purposes
 testmatrix_T = t(new_testmatrix)
@@ -232,19 +225,14 @@ matrix_multi_values = author_multi %*% testmatrix_T
 matrix_multi_values = t(matrix_multi_values)
 author_prediction = colnames(matrix_multi_values)[max.col(matrix_multi_values)]
 author_actual = rownames(matrix_multi_values)
-
 Correct_TF = as.integer(author_prediction == author_actual)
 total_correct = sum(Correct_TF)
-
 outcomes = data.frame(author_actual, optional = FALSE)
 outcomes$prediction = author_prediction
 outcomes$correct = Correct_TF
-
 percent_correct = sum(Correct_TF)/length(Correct_TF)
-
 correct_by_author = aggregate(outcomes$correct, by=list(authors = outcomes$author_actual), FUN = sum)
 correct_by_author$percent = correct_by_author$x/50
-
 ordered = correct_by_author[order(correct_by_author$percent),]
 ```
   

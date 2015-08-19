@@ -236,19 +236,13 @@ author_actual = rownames(matrix_multi_values)
 Correct_TF = as.integer(author_prediction == author_actual)
 total_correct = sum(Correct_TF)
 
-outcomes = data.frame(author_actual)
+outcomes = data.frame(author_actual, optional = FALSE)
 outcomes$prediction = author_prediction
 outcomes$correct = Correct_TF
 
-outcomes2 = data.frame(rbind(outcomes))
-
-
 percent_correct = sum(Correct_TF)/length(Correct_TF)
 
-
-correct_by_author = as.list.data.frame(aggregate(outcomes2$correct, by=list(authors = outcomes2$author_actual), FUN = sum))
-
-correct_by_author = as.data.frame(correct_by_author)
+correct_by_author = aggregate(outcomes$correct, by=list(authors = outcomes$author_actual), FUN = sum)
 correct_by_author$percent = correct_by_author$x/50
 
 ordered = correct_by_author[order(correct_by_author$percent),]
